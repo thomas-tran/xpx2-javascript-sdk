@@ -1,10 +1,13 @@
+import { from, Observable } from 'rxjs';
+
 export class IpfsClient {
-  constructor() {
-    const test = 't';
-    console.log(test);
+  private IPFS = require('ipfs-api');
+
+  constructor(hostMultiAddress: string, port?: string, options?: object) {
+    this.IPFS = this.IPFS(hostMultiAddress, port, options);
   }
 
-  public test(): any {
-    return 'test';
+  public getNodeId(): Observable<any> {
+    return from(this.IPFS.id());
   }
 }
